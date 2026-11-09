@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     {
         //Read the input from the player
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical"); // Deleting or changing this changes the fact that the player can move vertically 
+        
         //Move the player
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * playerSpeed);
         //Player leaves the screen horizontally

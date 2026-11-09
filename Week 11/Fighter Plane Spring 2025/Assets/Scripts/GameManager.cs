@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
 
     void CreateEnemyOne()
     {
-        Instantiate(EnemyOnePrefab,new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
+        Instantiate(EnemyOnePrefab, new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
     }
     void CreateEnemyTwo()
     {
-        Instantiate(EnemyTwoPrefab,new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
+        Instantiate(EnemyTwoPrefab, new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
     }
 }

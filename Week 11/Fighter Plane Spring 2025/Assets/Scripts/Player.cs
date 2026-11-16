@@ -12,10 +12,9 @@ public class Player : MonoBehaviour
 
     private float playerSpeed;
     private float horizontalInput;
-    private float verticalInput;
+    //private float verticalInput;
 
     private float horizontalScreenLimit = 9.5f;
-    private float verticalScreenLimit = 6.5f;
 
     public GameObject bulletPrefab;
 
@@ -47,20 +46,13 @@ public class Player : MonoBehaviour
     {
         //Read the input from the player
         horizontalInput = Input.GetAxis("Horizontal");
-       //Deleted vertical input so player can't go horizontally
-      
-   //Move the player
-        transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * playerSpeed);
+        //verticalInput = Input.GetAxis("Vertical");
+        //Move the player
+        transform.Translate(new Vector3(horizontalInput, 0) * Time.deltaTime * playerSpeed);
         //Player leaves the screen horizontally
-        if(transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
+        if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
         {
             transform.position = new Vector3(transform.position.x * -1, transform.position.y, 0);
         }
-        //Player leaves the screen vertically
-        if(transform.position.y > verticalScreenLimit || transform.position.y <= -verticalScreenLimit)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
-        }
     }
-
 }

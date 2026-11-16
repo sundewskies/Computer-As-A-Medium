@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     void CreateSky()
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 60; i++)
         {
             Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
         }
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int earnedScore)
     {
         score = score + earnedScore;
+        Debug.Log("Score: " + score);
     }
 
     public void ChangeLivesText (int currentLives)

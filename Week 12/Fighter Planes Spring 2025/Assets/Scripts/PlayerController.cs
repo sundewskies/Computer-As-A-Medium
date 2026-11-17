@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 
     public int lives;
     private float speed;
+    private int weaponType;
+    private bool invincible = false;   // new
+
 
     private GameManager gameManager;
 
@@ -34,7 +37,11 @@ public class PlayerController : MonoBehaviour
 
     public void LoseALife()
     {
-        //lives = lives - 1;
+      if (invincible)
+    {
+        return;
+    }
+    //lives = lives - 1;
         //lives -= 1;
         lives--;
         gameManager.ChangeLivesText(lives);

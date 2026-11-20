@@ -45,6 +45,25 @@ public class PlayerController : MonoBehaviour
         //lives -= 1;
         lives--;
         gameManager.ChangeLivesText(lives);
+        invincible = true;
+        StartCoroutine(InvincibleOff());
+        if (lives == 0);
+       
+
+
+
+
+
+    IEnumerator InvincibleOff()
+        {
+            yield return new WaitForSeconds(2f);
+            invincible = false;
+            gameManager.PlaySound(2);
+        }
+
+
+
+        gameManager.ChangeLivesText(lives);
         if (lives == 0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);

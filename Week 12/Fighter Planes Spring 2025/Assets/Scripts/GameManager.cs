@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
     public GameObject cloudPrefab;
     public GameObject coinPrefab;
 
+    
+  public AudioClip powerupSound;
+    public AudioClip powerdownSound;
+    public GameObject audioPlayer;
+
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI ScoreText;
 
@@ -59,6 +64,25 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    public void PlaySound(int whichSound)
+    {
+        switch (whichSound)
+        {
+            case 1:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(powerupSound);
+                break;
+            case 2:
+                audioPlayer.GetComponent<AudioSource>().PlayOneShot(powerdownSound);
+                break;
+        }
+    }
+
+
+
+
+
+
     public void AddScore(int earnedScore)
     {
         score += earnedScore;

@@ -15,26 +15,33 @@ public class GameManager : MonoBehaviour
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
     public GameObject coinPrefab;
+    public GameObject powerupPrefab;
 
-    
-  public AudioClip powerupSound;
+
+
+    public AudioClip powerupSound;
     public AudioClip powerdownSound;
     public GameObject audioPlayer;
 
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI powerupText;
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
     public int score=0;
 
-    // Start is called before the first frame update
+    
+
+
+   // Start is called before the first frame update
     void Start()
     {
         horizontalScreenSize = 10f;
         verticalScreenSize = 6.5f;
         score = 0;
+
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
         InvokeRepeating("CreateEnemy", 1, 3);
@@ -51,6 +58,12 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
+
+    void CreatePowerup()
+    {
+        Instantiate(powerupPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
+    }
+
     void CreateCoin()
     {
         Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
@@ -64,6 +77,37 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    public void ManagePowerupText(int powerupType)
+    {
+        switch (powerupType)
+        {
+            case 1:
+                powerupText.text = "Speed!";
+                break;
+            case 2:
+                powerupText.text = "Double Weapon!";
+                break;
+            case 3:
+                powerupText.text = "Triple Weapon!";
+                break;
+            case 4:
+                powerupText.text = "Shield!";
+                break;
+            default:
+                powerupText.text = "No powerups yet!";
+                break;
+        }
+    }
+
+    IEnumerator SpawnPowerup()
+    {
+        float spawnTime = Random.Range(3, 5);
+        yield return new WaitForSeconds(spawnTime);
+        CreatePowerup();
+        StartCoroutine(SpawnPowerup());
+    }
+
 
     public void PlaySound(int whichSound)
     {

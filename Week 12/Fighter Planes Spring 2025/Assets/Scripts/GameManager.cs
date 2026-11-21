@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public AudioClip powerdownSound;
     public GameObject audioPlayer;
 
+
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI powerupText;

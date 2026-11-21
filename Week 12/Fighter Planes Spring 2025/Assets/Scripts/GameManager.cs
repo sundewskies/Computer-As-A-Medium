@@ -11,11 +11,15 @@ using System.Runtime.CompilerServices;
 public class GameManager : MonoBehaviour
 {
 
+
+
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
     public GameObject coinPrefab;
-    public GameObject powerupPrefab;
+    public GameObject ShieldPrefab;
+
+  
 
 
 
@@ -30,9 +34,9 @@ public class GameManager : MonoBehaviour
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
-    public int score=0;
+    public int score = 0;
 
-    
+ 
 
 
    // Start is called before the first frame update
@@ -44,7 +48,7 @@ public class GameManager : MonoBehaviour
 
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
-        InvokeRepeating("CreateEnemy", 1, 3);
+        InvokeRepeating("CreateEnemy", 1, 2);
         InvokeRepeating("CreateCoin", 5, Random.Range(0.2f, 3.5f));
     }
 
@@ -59,12 +63,7 @@ public class GameManager : MonoBehaviour
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
 
-    void CreatePowerup()
-    {
-        Instantiate(powerupPrefab, new Vector3(Random.Range(-horizontalScreenSize * 0.8f, horizontalScreenSize * 0.8f), Random.Range(-verticalScreenSize * 0.8f, verticalScreenSize * 0.8f), 0), Quaternion.identity);
-    }
-
-    void CreateCoin()
+  void CreateCoin()
     {
         Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
@@ -100,13 +99,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnPowerup()
-    {
-        float spawnTime = Random.Range(3, 5);
-        yield return new WaitForSeconds(spawnTime);
-        CreatePowerup();
-        StartCoroutine(SpawnPowerup());
-    }
 
 
     public void PlaySound(int whichSound)

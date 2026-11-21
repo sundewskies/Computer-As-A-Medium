@@ -21,8 +21,10 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
 
     public GameObject bulletPrefab;
-    public GameObject explosionPrefab;
+    public GameObject thrusterPrefab;
     public GameObject shieldPrefab;
+    public GameObject explosionPrefab;
+    
 
 
 
@@ -118,8 +120,15 @@ if (lives == 0)
             int whichPowerup = Random.Range(1, 5);
             gameManager.PlaySound(1);
             switch (whichPowerup)
-            {
-                case 4:
+          
+ {
+            case 1:
+                    speed = 10f;
+                    StartCoroutine(SpeedPowerDown());
+                    thrusterPrefab.SetActive(true);
+                    gameManager.ManagePowerupText(1);
+                    break;
+case 4:
                     //
                     //Picked up shield
                     //Picked up shield
@@ -140,6 +149,15 @@ if (lives == 0)
 
 
 
+
+    IEnumerator SpeedPowerDown()
+    {
+        yield return new WaitForSeconds(3f);
+        speed = 5f;
+        thrusterPrefab.SetActive(false);
+        gameManager.ManagePowerupText(0);
+        gameManager.PlaySound(2);
+    }
 
 
     void Shooting()

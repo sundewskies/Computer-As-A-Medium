@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Runtime.CompilerServices;
 
 
 
@@ -12,12 +13,13 @@ public class GameManager : MonoBehaviour
 {
 
 
-
+    public GameObject powerupPrefab;
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
     public GameObject coinPrefab;
     public GameObject ShieldPrefab;
+
 
   
 
@@ -51,13 +53,37 @@ public class GameManager : MonoBehaviour
         CreateSky();
         InvokeRepeating("CreateEnemy", 1, 2);
         InvokeRepeating("CreateCoin", 5, Random.Range(0.2f, 3.5f));
+        
+
+
+        StartCoroutine(SpawnPowerup());
+        powerupText.text = "No powerups yet!";
+
+        void CreatePowerup()
+        {
+            Instantiate(powerupPrefab,
+                new Vector3(Random.Range(-horizontalScreenSize * 0.8f,
+                horizontalScreenSize * 0.8f), verticalScreenSize, 0),
+                Quaternion.identity);
+        }
+
+        IEnumerator SpawnPowerup()
+        {
+            float spawnTime = Random.Range(3, 5);
+            yield return new WaitForSeconds(spawnTime);
+            CreatePowerup();
+            StartCoroutine(SpawnPowerup());
+        }
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+      
+
     }
+
 
     void CreateEnemy()
     {
@@ -75,7 +101,11 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
         }
-        
+      
+
+
+
+
     }
 
     public void ManagePowerupText(int powerupType)
@@ -84,12 +114,6 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 powerupText.text = "Speed!";
-                break;
-            case 2:
-                powerupText.text = "Double Weapon!";
-                break;
-            case 3:
-                powerupText.text = "Triple Weapon!";
                 break;
             case 4:
                 powerupText.text = "Shield!";

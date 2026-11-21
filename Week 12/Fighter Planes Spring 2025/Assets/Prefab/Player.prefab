@@ -272,9 +272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 0
   bulletPrefab: {fileID: 8568965665149658710, guid: b1eed6253aa069845b0edf3f90db799d, type: 3}
-  explosionPrefab: {fileID: 1886710396827344234, guid: e8e63456aa1d9d240ab38a0453e59388, type: 3}
   thrusterPrefab: {fileID: 589074123346598530}
   shieldPrefab: {fileID: 4549726303721968335}
+  explosionPrefab: {fileID: 1886710396827344234, guid: e8e63456aa1d9d240ab38a0453e59388, type: 3}
 --- !u!82 &-8757797614237147667
 AudioSource:
   m_ObjectHideFlags: 0
